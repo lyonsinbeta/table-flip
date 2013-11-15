@@ -70,6 +70,12 @@ FLIPPED_LETTERS = {
 	"'" => ","
 }
 
+  def flip_word(word)
+     word.split(//).reverse.map do |l|
+	    FLIPPED_LETTERS[l].nil? ? l : FLIPPED_LETTERS[l]
+    end.join("")
+  end
+
   get "/" do
     erb :index 
   end
@@ -143,10 +149,7 @@ FLIPPED_LETTERS = {
   end
 
   get "/flipping/:word" do
-    @word = params[:word]
-    @flipped_word = @word.split(//).reverse.map do |l|
-	    FLIPPED_LETTERS[l].nil? ? l : FLIPPED_LETTERS[l]
-    end.join("")
+    @flipped_word = flip_word(params[:word])
     "(╯°□°)╯︵ #{@flipped_word}"
   end
 
