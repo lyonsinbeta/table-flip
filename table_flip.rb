@@ -95,9 +95,9 @@ FLIPPED_LETTERS = {
 	post "/flipping" do
 		if cu_online_slack?(params)
 		  RestClient.post "#{SLACK}",
-			                { :params => { "token" = > SLACK_TOKEN,
-																			"payload" =>
-																 	    { "text" => "(╯°□°)╯︵ ┻━┻" }}}
+			                { :params => { "token" => SLACK_TOKEN,
+																		 "payload" =>
+																 	   { "text" => "(╯°□°)╯︵ ┻━┻" }}}
 		else
 			redirect "/"
 		end
