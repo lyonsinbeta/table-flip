@@ -1,9 +1,7 @@
 require 'sinatra/base'
-require 'rest_client'
 require 'slack-notify'
 
 SLACK_TOKEN  = ENV["SLACK_TOKEN"]
-SLACK_CLIENT = SlackNotify::Client.new("cuonline", SLACK_TOKEN)
 
 class TableFlip < Sinatra::Base
 
@@ -85,6 +83,13 @@ FLIPPED_LETTERS = {
 		true
 	end
 
+	def make_client(params)
+		SLACK_CLIENT = SlackNotify::Client.new("cuonline", SLACK_TOKEN, {
+			channel: params["channel_name"],
+			username: "#{params["user_name"]} flips!",
+		})
+	end
+
   get "/" do
     erb :index
   end
@@ -95,8 +100,8 @@ FLIPPED_LETTERS = {
 
 	post "/flipping" do
 		if cu_online_slack?(params)
-			SLACK_CLIENT.username = "#{params["user_name"]} flips!"
-		  SLACK_CLIENT.notify("(╯°□°)╯︵ ┻━┻", "#{params["channel_name"]}")
+			SLACK_CLIENT = make_client(params)
+		  SLACK_CLIENT.notify("(╯°□°)╯︵ ┻━┻")
 		else
 			redirect "/"
 		end
