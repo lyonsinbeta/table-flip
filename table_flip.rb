@@ -101,11 +101,12 @@ FLIPPED_LETTERS = {
   end
 
 	post "/flipping" do
-		puts "I can haz logs?"
-		puts params
 		if cu_online_slack?(params)
 			slack_client = make_client(params)
-		  slack_client.notify("(╯°□°)╯︵ ┻━┻")
+		  if params["text"].empty?
+				slack_client.notify("(╯°□°)╯︵ ┻━┻")
+			else
+				slack_client.notify("(╯°□°)╯︵ #{flip_word(params["text"])}")
 		else
 			redirect "/"
 		end
