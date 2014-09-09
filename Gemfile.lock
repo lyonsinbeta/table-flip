@@ -1,7 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    mime-types (2.3)
+    netrc (0.7.7)
     rack (1.5.2)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     sinatra (1.1.0)
       rack (~> 1.1)
       tilt (~> 1.1)
@@ -11,4 +16,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rest-client (~> 1.7.2)
   sinatra (= 1.1.0)
