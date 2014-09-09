@@ -73,6 +73,26 @@ FLIPPED_LETTERS = {
 	"'" => ","
 }
 
+FLIP = {
+	flipping: "(╯°□°)╯︵ ┻━┻",
+	patience: "┬─┬ ノ( ゜-゜ノ)",
+	pudgy:	  "(ノ ゜Д゜)ノ ︵ ┻━┻"
+	battle:   "(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)",
+	me:       "┬─┬ ︵ /(.□. \)",
+	aggravated: "(ﾉಥ益ಥ）ﾉ ┻━┻",
+	putback: "(ノ^_^)ノ┻━┻ ┬─┬ ノ( ^_^ノ)",
+	dude: "(╯°Д°）╯︵ /(.□ . \)",
+	emotional: "(╯'□')╯︵ ┻━┻",
+	freakout: "(ﾉಥДಥ)ﾉ︵┻━┻･/",
+	hercules: "(/ .□.)\ ︵╰(゜Д゜)╯︵ /(.□. \)",
+	jedi: "(._.) ~ ︵ ┻━┻",
+	bear: "ʕノ•ᴥ•ʔノ ︵ ┻━┻",
+	magical: "(/¯◡ ‿ ◡)/¯ ~ ┻━┻",
+	robot: "┗[© ♒ ©]┛ ︵ ┻━┻",
+	russia: "ノ┬─┬ノ ︵ ( \o°o)\ ",
+	happy: "┻━┻ ︵ ლ(⌒-⌒ლ)"
+}
+
   def flip_word(word)
      word.split(//).reverse.map do |l|
 	    FLIPPED_LETTERS[l].nil? ? l : FLIPPED_LETTERS[l]
@@ -97,14 +117,16 @@ FLIPPED_LETTERS = {
   end
 
   get "/flipping" do
-    "(╯°□°)╯︵ ┻━┻"
+    FLIP[:flipping]
   end
 
 	post "/flipping" do
 		if cu_online_slack?(params)
 			slack_client = make_client(params)
 		  if params["text"].empty?
-				slack_client.notify("(╯°□°)╯︵ ┻━┻")
+				slack_client.notify(FLIP[:flipping])
+			elsif FLIP.include? "/#{params["text"].downcase.to_sym}"
+				slack.client.notify(FLIP[params["text"].downcase.to_sym])
 			else
 				slack_client.notify("(╯°□°)╯︵ #{flip_word(params["text"])}")
 			end
@@ -114,67 +136,67 @@ FLIPPED_LETTERS = {
 	end
 
   get "/patience" do
-    "┬─┬ ノ( ゜-゜ノ)"
+    FLIP[:patience]
   end
 
   get "/pudgy" do
-    "(ノ ゜Д゜)ノ ︵ ┻━┻"
+    FLIP[:pudgy]
   end
 
   get "/battle" do
-    "(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)"
+    FLIP[:battle]
   end
 
   get "/me" do
-    "┬─┬ ︵ /(.□. \)"
+    FLIP[:me]
   end
 
   get "/aggravated" do
-    "(ﾉಥ益ಥ）ﾉ ┻━┻"
+    FLIP[:aggravated]
   end
 
   get "/putback" do
-    "(ノ^_^)ノ┻━┻ ┬─┬ ノ( ^_^ノ)"
+    FLIP[:putback]
   end
 
   get "/dude" do
-    "(╯°Д°）╯︵ /(.□ . \)"
+    FLIP[:dude]
   end
 
   get "/emotional" do
-    "(╯'□')╯︵ ┻━┻"
+    FLIP[:emotional]
   end
 
   get "/freakout" do
-    "(ﾉಥДಥ)ﾉ︵┻━┻･/"
+    FLIP[:freakout]
   end
 
   get "/hercules" do
-    "(/ .□.)\ ︵╰(゜Д゜)╯︵ /(.□. \)"
+    FLIP[:hercules]
   end
 
   get "/jedi" do
-    "(._.) ~ ︵ ┻━┻"
+    FLIP[:jedi]
   end
 
   get "/bear" do
-    "ʕノ•ᴥ•ʔノ ︵ ┻━┻"
+    FLIP[:bear]
   end
 
   get "/magical" do
-    "(/¯◡ ‿ ◡)/¯ ~ ┻━┻"
+    FLIP[:magical]
   end
 
   get "/robot" do
-    "┗[© ♒ ©]┛ ︵ ┻━┻"
+    FLIP[:robot]
   end
 
   get "/russia" do
-    "ノ┬─┬ノ ︵ ( \o°o)\ "
+    FLIP[:russia]
   end
 
   get "/happy" do
-    "┻━┻ ︵ ლ(⌒-⌒ლ)"
+    FLIP[:happy]
   end
 
   get "/flipping/:word" do
