@@ -10,7 +10,7 @@ Simply make a `GET` request to `http://table-flip.herokuapp.com/[desired flip]` 
 ### Available Flips
 
 - `/flipping` - the classic
-- '/flipping/<WORD>` - flip a word of your choice
+- `/flipping/<WORD>` - flip a word of your choice
 - `/patience` - no flip
 - `/pudgy` - fat flip
 - `/battle` - fight to flip
@@ -27,4 +27,3 @@ Simply make a `GET` request to `http://table-flip.herokuapp.com/[desired flip]` 
 - `/robot` - all the good table flipping jobs...
 - `/russia` - in Soviet Russia table flip you
 - `/happy` - all smiles
-
