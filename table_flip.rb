@@ -95,6 +95,7 @@ FLIPPED_LETTERS = {
 
 	post "/flipping" do
 		if cu_online_slack?(params)
+			SLACK_CLIENT.username = "#{params["user_name"]} flips!"
 		  SLACK_CLIENT.notify("(╯°□°)╯︵ ┻━┻", "#{params["channel_name"]}")
 		else
 			redirect "/"
