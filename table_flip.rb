@@ -87,7 +87,7 @@ FLIPPED_LETTERS = {
 		SlackNotify::Client.new("cuonline", SLACK_TOKEN, {
 			channel: params["channel_name"],
 			group: params["group_name"],
-			username: "Flipbot",
+			username: "#{params["user_name"]} summons the Flipbot",
 			icon_emoji: ":rage1:"
 		})
 	end
