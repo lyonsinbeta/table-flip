@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'rest_client'
 
 class TableFlip < Sinatra::Base
 
@@ -76,13 +77,27 @@ FLIPPED_LETTERS = {
     end.join("")
   end
 
+	def cu_online_slack?(params)
+		true
+	end
+
   get "/" do
-    erb :index 
+    erb :index
   end
 
   get "/flipping" do
     "(╯°□°)╯︵ ┻━┻"
   end
+
+	post "/flipping" do
+		if cu_online_slack?(params)
+			slack = "https://cuonline.slack.com/services/hooks/incoming-webhook?"
+		  RestClient.post "#{slack}#{ENV[SLACK_TOKEN]}",
+			                :params => { "payload" => { "text" => "(╯°□°)╯︵ ┻━┻" }
+		else
+			redirect "/"
+		end
+	end
 
   get "/patience" do
     "┬─┬ ノ( ゜-゜ノ)"
@@ -103,7 +118,7 @@ FLIPPED_LETTERS = {
   get "/aggravated" do
     "(ﾉಥ益ಥ）ﾉ ┻━┻"
   end
-  
+
   get "/putback" do
     "(ノ^_^)ノ┻━┻ ┬─┬ ノ( ^_^ノ)"
   end
@@ -157,4 +172,3 @@ FLIPPED_LETTERS = {
     "Flipping not found."
   end
 end
-
