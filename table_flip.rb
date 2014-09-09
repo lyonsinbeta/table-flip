@@ -84,7 +84,7 @@ FLIPPED_LETTERS = {
 	end
 
 	def make_client(params)
-		SLACK_CLIENT = SlackNotify::Client.new("cuonline", SLACK_TOKEN, {
+		SlackNotify::Client.new("cuonline", SLACK_TOKEN, {
 			channel: params["channel_name"],
 			username: "#{params["user_name"]} flips!",
 		})
@@ -100,8 +100,8 @@ FLIPPED_LETTERS = {
 
 	post "/flipping" do
 		if cu_online_slack?(params)
-			SLACK_CLIENT = make_client(params)
-		  SLACK_CLIENT.notify("(╯°□°)╯︵ ┻━┻")
+			slack_client = make_client(params)
+		  slack_client.notify("(╯°□°)╯︵ ┻━┻")
 		else
 			redirect "/"
 		end
