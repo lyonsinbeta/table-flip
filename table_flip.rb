@@ -107,6 +107,7 @@ FLIPPED_LETTERS = {
 				slack_client.notify("(╯°□°)╯︵ ┻━┻")
 			else
 				slack_client.notify("(╯°□°)╯︵ #{flip_word(params["text"])}")
+			end
 		else
 			redirect "/"
 		end
