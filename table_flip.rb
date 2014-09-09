@@ -1,7 +1,8 @@
 require 'sinatra/base'
 require 'rest_client'
 
-SLACK = "https://cuonline.slack.com/services/hooks/incoming-webhook"
+SLACK       = "https://cuonline.slack.com/services/hooks/incoming-webhook"
+SLACK_TOKEN = ENV["SLACK_TOKEN"]
 
 class TableFlip < Sinatra::Base
 
@@ -93,9 +94,10 @@ FLIPPED_LETTERS = {
 
 	post "/flipping" do
 		if cu_online_slack?(params)
-		  RestClient.post "#{SLACK}#{ENV[SLACK_TOKEN]}",
-			                { :params => { "payload" =>
-																 { "text" => "(╯°□°)╯︵ ┻━┻" }}}
+		  RestClient.post "#{SLACK}",
+			                { :params => { "token" = > SLACK_TOKEN,
+																			"payload" =>
+																 	    { "text" => "(╯°□°)╯︵ ┻━┻" }}}
 		else
 			redirect "/"
 		end
