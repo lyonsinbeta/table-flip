@@ -76,7 +76,7 @@ FLIPPED_LETTERS = {
 FLIP = {
 	flipping:   "(╯°□°)╯︵ ┻━┻",
 	patience:   "┬─┬ ノ( ゜-゜ノ)",
-	pudgy:	    "(ノ ゜Д゜)ノ ︵ ┻━┻"
+	pudgy:	    "(ノ ゜Д゜)ノ ︵ ┻━┻",
 	battle:     "(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)",
 	me:         "┬─┬ ︵ /(.□. \)",
 	aggravated: "(ﾉಥ益ಥ）ﾉ ┻━┻",
