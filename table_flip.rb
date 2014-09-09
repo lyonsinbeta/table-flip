@@ -3,7 +3,7 @@ require 'rest_client'
 require 'slack-notify'
 
 SLACK_TOKEN  = ENV["SLACK_TOKEN"]
-SLACK_CLIENT = SlackNotify::CLient.new("cuonline", SLACK_TOKEN)
+SLACK_CLIENT = SlackNotify::Client.new("cuonline", SLACK_TOKEN)
 
 class TableFlip < Sinatra::Base
 
