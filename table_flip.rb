@@ -126,7 +126,7 @@ FLIP = {
 		  if params["text"].empty?
 				slack_client.notify(FLIP[:flipping])
 			elsif FLIP.include? params["text"].downcase.to_sym
-				slack.client.notify(FLIP[params["text"].downcase.to_sym])
+				slack_client.notify(FLIP[params["text"].downcase.to_sym])
 			else
 				slack_client.notify("(╯°□°)╯︵ #{flip_word(params["text"])}")
 			end
