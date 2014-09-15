@@ -105,8 +105,6 @@ FLIP = {
 
 	def make_client(params)
 		SlackNotify::Client.new("cuonline", SLACK_TOKEN, {
-			channel: params["channel_name"],
-			group: params["group_name"],
 			username: "#{params["user_name"]} summons the Flipbot",
 			icon_emoji: ":rage1:"
 		})
@@ -121,15 +119,23 @@ FLIP = {
   end
 
 	post "/flipping" do
-		puts params
+
 		if cu_online_slack?(params)
 			slack_client = make_client(params)
-		  if params["text"].empty?
-				slack_client.notify(FLIP[:flipping])
-			elsif FLIP.include? params["text"].downcase.to_sym
-				slack_client.notify(FLIP[params["text"].downcase.to_sym])
+			if params["channel_name"]
+				destination = "##{params["channel_name"]}"
+			elsif params["group_name"]
+				destination = params["group_name"]
 			else
-				slack_client.notify("(╯°□°)╯︵ #{flip_word(params["text"])}")
+				destination = "@#{params["user_name"]}"
+			end
+
+		  if params["text"].empty?
+				slack_client.notify(FLIP[:flipping], destination)
+			elsif FLIP.include? params["text"].downcase.to_sym
+				slack_client.notify(FLIP[params["text"].downcase.to_sym], destination)
+			else
+				slack_client.notify("(╯°□°)╯︵ #{flip_word(params["text"])}", destination)
 			end
 		else
 			redirect "/"
