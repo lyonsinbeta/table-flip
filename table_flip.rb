@@ -121,6 +121,7 @@ FLIP = {
   end
 
 	post "/flipping" do
+		puts params
 		if cu_online_slack?(params)
 			slack_client = make_client(params)
 		  if params["text"].empty?
